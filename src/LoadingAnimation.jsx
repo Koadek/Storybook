@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css } from '@emotion/core';
 import { PacmanLoader } from 'react-spinners';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 const override = css`
   display: block;
@@ -44,7 +44,7 @@ class LoadingAnimation extends Component {
 
   handleStart() {
     this.setState({ loading: true });
-    setTimeout(this.handleStop, this.state.value * 1000);
+    setTimeout(this.handleStop, this.state.value * 1000 + 500);
   }
 
   handleStop() {
@@ -54,16 +54,13 @@ class LoadingAnimation extends Component {
   render() {
     return (
       <div>
-        {this.state.loading && (
-          <PacmanLoader
-            css={override}
-            sizeUnit={'px'}
-            size={50}
-            color={'#123abc'}
-            loading={this.state.loading}
-            out={!this.state.visible}
-          />
-        )}
+        <PacmanLoader
+          css={override}
+          sizeUnit={'px'}
+          size={50}
+          color={'#123abc'}
+          loading={this.state.loading}
+        />
         <label>
           Time:
           <Input
