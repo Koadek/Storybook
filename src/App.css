@@ -20,3 +20,30 @@
 .App-link {
   color: #09d3ac;
 }
+
+.fade-in {
+  animation: fade-in-keyframes 1s;
+}
+
+.fade-out {
+  opacity: 0;
+  animation: fade-out-keyframes 1s;
+}
+
+@keyframes fade-in-keyframes {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out-keyframes {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
