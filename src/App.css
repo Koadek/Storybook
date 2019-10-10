@@ -22,12 +22,12 @@
 }
 
 .fade-in {
-  animation: fade-in-keyframes 1s;
+  animation: fade-in-keyframes 2s;
 }
 
 .fade-out {
   opacity: 0;
-  animation: fade-out-keyframes 1s;
+  animation: fade-out-keyframes 2s;
 }
 
 @keyframes fade-in-keyframes {

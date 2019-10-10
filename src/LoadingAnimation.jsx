@@ -33,12 +33,13 @@ class LoadingAnimation extends Component {
       value: 0,
       loading: false,
       fade: false,
+      timerFade: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleStart = this.handleStart.bind(this);
-    this.handleStop = this.handleStop.bind(this);
     this.handleFadeOut = this.handleFadeOut.bind(this);
+    this.handleAnimation = this.handleAnimation.bind(this);
   }
 
   handleChange(event) {
@@ -46,17 +47,26 @@ class LoadingAnimation extends Component {
   }
 
   handleStart() {
-    this.setState({ loading: true, fade: true });
-    setTimeout(this.handleStop, this.state.value * 1000 + 1000);
-    setTimeout(this.handleFadeOut, this.state.value * 1000 + 500);
+    if (this.state.value > 0) {
+      this.setState({ timerFade: true });
+      setTimeout(this.handleAnimation, 2000);
+    }
+    return;
   }
 
-  handleStop() {
-    this.setState({ loading: false });
+  handleAnimation() {
+    this.setState({ loading: true, fade: true });
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, this.state.value * 1000 + 4000);
+    setTimeout(this.handleFadeOut, this.state.value * 1000 + 2000);
   }
 
   handleFadeOut() {
     this.setState({ fade: false });
+    setTimeout(() => {
+      this.setState({ timerFade: false });
+    }, 2000);
   }
 
   render() {
@@ -71,13 +81,15 @@ class LoadingAnimation extends Component {
             loading={this.state.loading}
           />
         </div>
-        <div>
+        <div className={this.state.timerFade ? 'fade-out' : 'fade-in'}>
           <label>
             Time:
             <Input
               type="number"
               value={this.state.value}
               onChange={this.handleChange}
+              min="1"
+              step="1"
             />
             secondes
           </label>
