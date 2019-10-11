@@ -3,6 +3,7 @@ import { css } from '@emotion/core';
 import { PacmanLoader } from 'react-spinners';
 import styled from 'styled-components';
 import './App.css';
+import { relative } from 'path';
 
 const override = css`
   display: block;
@@ -16,14 +17,26 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  border: 1px solid rgb(238, 238, 238);
-  border-radius: 3px;
-  background-color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 15px;
-  padding: 3px 10px;
-  margin: 10px;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  background: #2196f3;
   outline: none;
+  text-decoration: none;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
 `;
 
 class LoadingAnimation extends Component {
@@ -71,8 +84,8 @@ class LoadingAnimation extends Component {
 
   render() {
     return (
-      <div>
-        <div className={this.state.fade ? 'fade-in' : 'fade-out'}>
+      <div style={{ position: relative }}>
+        <Wrapper className={this.state.fade ? 'fade-in' : 'fade-out'}>
           <PacmanLoader
             css={override}
             sizeUnit={'px'}
@@ -80,8 +93,8 @@ class LoadingAnimation extends Component {
             color={'#123abc'}
             loading={this.state.loading}
           />
-        </div>
-        <div className={this.state.timerFade ? 'fade-out' : 'fade-in'}>
+        </Wrapper>
+        <Wrapper className={this.state.timerFade ? 'fade-out' : 'fade-in'}>
           <label>
             Time:
             <Input
@@ -94,7 +107,7 @@ class LoadingAnimation extends Component {
             secondes
           </label>
           <Button onClick={this.handleStart}>Start</Button>
-        </div>
+        </Wrapper>
       </div>
     );
   }
